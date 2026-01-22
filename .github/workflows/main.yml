@@ -1,38 +1,26 @@
 name: CI Branch Check
- 
+
 on:
-
   push:
-
     branches:
-
       - main
-
       - dev
- 
+
+  schedule:
+    - cron: "5 * * * *"
+
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
- 
+
     steps:
-
       - name: Repository auschecken
+        uses: actions/checkout@v5
 
-        uses: actions/checkout@v6
- 
       - name: Branch erkennen und Text ausgeben
-
         run: |
-
           if [ "$GITHUB_REF_NAME" = "main" ]; then
-
             echo "Push auf MAIN-Branch"
-
           else
-
             echo "Push auf DEV-Branch"
-
           fi
- 
